@@ -110,52 +110,53 @@ function App() {
           <svg width="22" height="22" viewBox="0 0 22 22"><polygon points="5,4 19,11 5,18" fill="#222"/></svg>
         )}
       </button>
-      {/* Floating Add Button */}
+      {/* Floating Add/Close Button */}
       <button
-        onClick={() => setShowModal(true)}
+        onClick={() => setShowModal(show => !show)}
         style={{
           position: 'fixed',
           right: 32,
           bottom: 32,
-          width: 56,
-          height: 56,
-          borderRadius: '50%',
-          background: '#222',
-          color: '#fff',
-          fontSize: 36,
+          color: '#000',
+          fontSize: 28,
+          fontWeight: 400,
           border: 'none',
-          boxShadow: '2px 2px 12px rgba(0,0,0,0.18)',
+          background: 'none',
+          boxShadow: 'none',
+          outline: 'none',
           cursor: 'pointer',
-          zIndex: 1000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: "'Oxygen', sans-serif"
+          zIndex: 1201,
+          fontFamily: "'Oxygen', sans-serif",
+          padding: 0,
         }}
-        aria-label="Add milestone"
+        aria-label={showModal ? 'Close' : 'Add milestone'}
+        tabIndex={0}
+        onFocus={e => e.currentTarget.style.outline = 'none'}
+        onBlur={e => e.currentTarget.style.outline = 'none'}
       >
-        +
+        {showModal ? '×' : '+'}
       </button>
       {/* Side Panel for adding milestone */}
       <div
         style={{
           position: 'fixed',
-          top: 0,
-          right: 0,
+          right: 90,
           width: 340,
-          height: '100vh',
-          background: 'rgba(30,30,30,0.18)',
-          boxShadow: '-4px 0 24px rgba(0,0,0,0.12)',
+          height: 64,
+          bottom: 20,
+          background: 'none',
+          boxShadow: 'none',
           zIndex: 1100,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          borderRadius: 16,
           transition: 'transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s cubic-bezier(.4,0,.2,1)',
           fontFamily: "'Oxygen', sans-serif",
-          backdropFilter: 'blur(16px) saturate(1.2)',
-          WebkitBackdropFilter: 'blur(16px) saturate(1.2)',
-          borderLeft: '1.5px solid #444',
-          transform: showModal ? 'translateX(0)' : 'translateX(100%)',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
+          borderLeft: 'none',
+          transform: showModal ? 'translateX(0)' : 'translateX(120%)',
           opacity: showModal ? 1 : 0,
           pointerEvents: showModal ? 'auto' : 'none',
         }}
@@ -165,52 +166,23 @@ function App() {
             onSubmit={handleAdd}
             style={{
               width: '100%',
-              padding: '48px 24px',
+              padding: '0 16px',
               display: 'flex',
-              flexDirection: 'column',
-              gap: 18,
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
               fontFamily: "'Oxygen', sans-serif",
               background: 'none',
               boxShadow: 'none',
               position: 'relative',
-              height: '100%',
-              justifyContent: 'center',
             }}
           >
-            {/* Close button in same position as open '+' button */}
-            <button
-              type="button"
-              onClick={() => setShowModal(false)}
-              style={{
-                position: 'fixed',
-                right: 32,
-                bottom: 32,
-                width: 56,
-                height: 56,
-                borderRadius: '50%',
-                background: '#222',
-                color: '#fff',
-                fontSize: 36,
-                border: 'none',
-                boxShadow: '2px 2px 12px rgba(0,0,0,0.18)',
-                cursor: 'pointer',
-                zIndex: 1200,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: "'Oxygen', sans-serif",
-                transition: 'background 0.2s',
-              }}
-              aria-label="Close"
-            >
-              ×
-            </button>
             <input
               type="text"
               placeholder="MM.DD or range"
               value={date}
               onChange={e => setDate(e.target.value)}
-              style={{ fontFamily: "'Oxygen', sans-serif", fontSize: 18, padding: 8, border: '1.5px solid #fff', borderRadius: 6, background: 'rgba(255,255,255,0.12)', color: '#fff', outline: 'none', boxShadow: '0 1px 8px #0002', marginBottom: 2 }}
+              style={{ fontFamily: "'Oxygen', sans-serif", fontSize: 15, height: 36, padding: '0 10px', border: '0.5px solid #fff', borderRadius: 6, background: 'rgba(255,255,255,0.12)', color: '#fff', outline: 'none', boxShadow: 'none', margin: 0, flex: 1, minWidth: 0 }}
               autoFocus
             />
             <input
@@ -218,11 +190,11 @@ function App() {
               placeholder="Describe your win..."
               value={desc}
               onChange={e => setDesc(e.target.value)}
-              style={{ fontFamily: "'Oxygen', sans-serif", fontSize: 18, padding: 8, border: '1.5px solid #fff', borderRadius: 6, background: 'rgba(255,255,255,0.12)', color: '#fff', outline: 'none', boxShadow: '0 1px 8px #0002' }}
+              style={{ fontFamily: "'Oxygen', sans-serif", fontSize: 15, height: 36, padding: '0 10px', border: '0.5px solid #fff', borderRadius: 6, background: 'rgba(255,255,255,0.12)', color: '#fff', outline: 'none', boxShadow: 'none', margin: 0, flex: 2, minWidth: 0 }}
             />
             <button
               type="submit"
-              style={{ fontFamily: "'Oxygen', sans-serif", fontSize: 18, padding: '8px 0', border: '2px solid #fff', background: 'rgba(30,30,30,0.7)', color: '#fff', borderRadius: 6, cursor: 'pointer', marginTop: 8, boxShadow: '0 2px 8px #0003' }}
+              style={{ fontFamily: "'Oxygen', sans-serif", fontSize: 15, height: 36, padding: '0 16px', border: '0.5px solid #fff', background: 'rgba(30,30,30,0.7)', color: '#fff', borderRadius: 6, cursor: 'pointer', marginLeft: 8, boxShadow: '0 2px 8px #0003', display: 'flex', alignItems: 'center' }}
             >
               Add
             </button>

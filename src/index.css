@@ -57,6 +57,24 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button[aria-label="Close"] {
+  border-radius: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+button[aria-label="Add milestone"] {
+  border-radius: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
